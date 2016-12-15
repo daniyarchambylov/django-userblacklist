@@ -1,0 +1,9 @@
+swp
+.idea
+*.lock
+*.pyc
+build
+*.sqlite3
+manage.py
+templates/
+django_playground/
