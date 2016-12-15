@@ -25,7 +25,7 @@ class BlackListUser(models.Model):
         if not isinstance(user, User):
             user = User.objects.get(pk=user)
 
-        user.is_blocked = True
+        user.is_active = False
         obj = cls.objects.create(user=user, reason=reason, status=STATUS_CHOICES[0][0])
         user.save()
         return obj
@@ -37,7 +37,7 @@ class BlackListUser(models.Model):
         if not isinstance(user, User):
             user = User.objects.get(pk=user)
 
-        user.is_blocked = False
+        user.is_active = True
         obj = cls.objects.create(user=user, reason=reason, status=STATUS_CHOICES[1][0])
         user.save()
         return obj
