@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='django_userblacklist',
-    version='0.0.2',
+    version='0.1.0',
     packages=['userblacklist', 'userblacklist.migrations'],
     url='https://github.com/daniyarchambylov/django-userblacklist',
     license='',
