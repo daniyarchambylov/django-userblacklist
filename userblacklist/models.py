@@ -11,6 +11,7 @@ class BlackListUser(models.Model):
     reason = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=100, choices=STATUS_CHOICES)
+    reporter = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, related_name='reporter_blacklist')
 
     def __str__(self):
         return '%s  [%s] {%s} @ %s' % (self.id, self.user, self.status, self.created_at)
