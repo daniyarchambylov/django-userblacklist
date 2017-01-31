@@ -23,8 +23,12 @@ class BlackListUser(models.Model):
     def add(cls, user, reason, reporter):
         from django.contrib.auth import get_user_model
         User = get_user_model()
+
         if not isinstance(user, User):
             user = User.objects.get(pk=user)
+
+        if not isinstance(reporter, User):
+            reporter = User.objects.get(pk=reporter)
 
         user.is_active = False
         obj = cls.objects.create(user=user, reason=reason, reporter=reporter, status=STATUS_CHOICES[0][0])
@@ -35,8 +39,12 @@ class BlackListUser(models.Model):
     def remove(cls, user, reason, reporter):
         from django.contrib.auth import get_user_model
         User = get_user_model()
+
         if not isinstance(user, User):
             user = User.objects.get(pk=user)
+
+        if not isinstance(reporter, User):
+            reporter = User.objects.get(pk=reporter)
 
         user.is_active = True
         obj = cls.objects.create(user=user, reason=reason, reporter=reporter, status=STATUS_CHOICES[1][0])

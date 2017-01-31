@@ -12,6 +12,7 @@ class UserBlacklistForm(forms.Form):
     user = forms.IntegerField()
     status = forms.CharField()
     reason = forms.CharField()
+    reporter = forms.IntegerField()
 
     def clean_status(self):
         status = self.cleaned_data.get('status')
@@ -26,9 +27,9 @@ class UserBlacklistForm(forms.Form):
     def save(self):
         status = self.cleaned_data['status']
         if status == STATUS_CHOICES[0][0]:
-            instance = BlackListUser.add(self.cleaned_data['user'], self.cleaned_data['reason'])
+            instance = BlackListUser.add(self.cleaned_data['user'], self.cleaned_data['reason'], self.cleaned_data['reporter'])
         elif status == STATUS_CHOICES[1][0]:
-            instance = BlackListUser.remove(self.cleaned_data['user'], self.cleaned_data['reason'])
+            instance = BlackListUser.remove(self.cleaned_data['user'], self.cleaned_data['reason'], self.cleaned_data['reporter'])
         else:
             raise ValueError(status_message_error)
 
